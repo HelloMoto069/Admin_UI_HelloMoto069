@@ -1,0 +1,274 @@
+/* Import external font-awesome CSS */
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css");
+
+/* Container styles */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  justify-content: center; /* Center content vertically */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.search-input {
+  margin-bottom: 10px;
+  padding: 8px 12px; /* Adjust padding for a more modern look */
+  border: none; /* Remove the border */
+  border-radius: 20px; /* Increase the border radius for rounded corners */
+  background-color: #f2f2f2; /* Add a background color */
+  color: #333; /* Set text color */
+  font-size: 16px; /* Increase the font size */
+  width: 70%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Add smooth transitions */
+}
+
+.search-input:focus {
+  outline: none; /* Remove the default focus outline */
+  background-color: #e6e6e6; /* Change background color on focus */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust box shadow on focus */
+}
+
+/* Clear Search button styles */
+.clear-search-button {
+  padding: 8px 16px;
+  background-color: red;
+  border: none;
+  border-radius: 20px; /* Task 2: Rounded button */
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  position: absolute; /* Position the button absolutely */
+  right: 70px; /* Adjust the left position as needed */
+  top: 30px; /* Adjust the top position as needed */
+}
+
+/* Table styles */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 7px;
+  text-align: left;
+}
+
+.table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.table td {
+  border-bottom: 1px solid #ccc;
+}
+
+.delete-row {
+    padding: 7px 11px;
+    background-color: red;
+    border: none;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 10px;
+    cursor: pointer;
+    position: flex; /* Position the button absolutely */
+    margin-left: 7px;
+  }
+
+  .edit-row {
+    padding: 7px 11px;
+    background-color: rgb(255, 166, 0);
+    border: none;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 10px;
+    cursor: pointer;
+    position: flex; /* Position the button absolutely */
+    margin-left: 7px;
+  }
+
+/* Selected row style */
+.table .selected {
+  background-color: #e6f3ff;
+}
+
+/* Pagination styles */
+.pagination {
+  margin-top: 10px;
+}
+
+.pagination button {
+  display: inline-block;
+  padding: 5px 10px;
+  margin-right: 5px;
+  background-color: #f2f2f2;
+  border: none;
+  border-radius: 20px; /* Task 1: Rounded buttons */
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: #b3d9ff; /* Task 1: Brighter color */
+}
+
+.pagination button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination button:hover {
+  background-color: #b3d9ff; /* Task 1: Hover effect */
+}
+
+/* Delete selected button styles */
+.delete-selected-button {
+  padding: 8px 16px;
+  background-color: red !important;
+  border: none;
+  border-radius: 20px; /* Task 2: Rounded button */
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  position: absolute; /* Position the button absolutely */
+  left: 0;
+}
+
+.delete-selected-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* Button container styles */
+.btn-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow buttons to wrap to the next line */
+  justify-content: center; /* Center buttons horizontally */
+  gap: 10px; /* Add a gap between the buttons */
+}
+
+.btn-container button {
+  display: flex; /* Add flex display for proper alignment */
+  align-items: center; /* Center the content vertically */
+  justify-content: center; /* Center the content horizontally */
+  padding: 8px 12px;
+  background-color: #f2f2f2;
+  border: none;
+  border-radius: 100px; /* Task 2: Rounded buttons */
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.btn-container button:hover {
+  background-color: #b3d9ff; /* Task 1: Hover effect */
+}
+
+.btn-container button i {
+  margin-right: px; /* Add margin to the right of the icon */
+}
+
+/* Modal style */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+  max-width: 600px;
+  width: 80%;
+}
+
+.modal h3 {
+  margin-top: 0;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.modal p {
+  margin-bottom: 20px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.modal button {
+  padding: 12px 24px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 17px;
+}
+
+.modal button:hover {
+  background-color: #45a049;
+}
+
+/* Media Queries */
+@media only screen and (max-width: 600px) {
+  .modal-content {
+    padding: 20px; /* Adjust padding for smaller screens */
+    width: 90%; /* Adjust width for smaller screens */
+  }
+
+  .modal h3 {
+    font-size: 20px; /* Adjust font size for smaller screens */
+  }
+
+  .modal p {
+    font-size: 14px; /* Adjust font size for smaller screens */
+  }
+
+  .modal button {
+    padding: 10px 20px; /* Adjust padding for smaller screens */
+    font-size: 16px; /* Adjust font size for smaller screens */
+  }
+
+  .btn-container button {
+    padding: 6px 10px; /* Adjust padding for smaller screens */
+    font-size: 8px; /* Adjust font size for smaller screens */
+    margin: 2px; /* Adjust margin for smaller screens */
+  }
+
+  .delete-selected-button {
+    left: 190px;
+    bottom: -355px;
+  }
+
+  .search-input {
+    margin-top: 300px;
+    margin-bottom: 10px;
+    padding: 8px 12px; /* Adjust padding for a more modern look */
+    border: none; /* Remove the border */
+    border-radius: 20px; /* Increase the border radius for rounded corners */
+    background-color: #f2f2f2; /* Add a background color */
+    color: #333; /* Set text color */
+    font-size: 16px; /* Increase the font size */
+    width: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Add smooth transitions */
+  }
+
+  .search-input:focus {
+    outline: none; /* Remove the default focus outline */
+    background-color: #e6e6e6; /* Change background color on focus */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust box shadow on focus */
+  }
+}
