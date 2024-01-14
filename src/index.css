@@ -223,52 +223,13 @@
 
 /* Media Queries */
 @media only screen and (max-width: 600px) {
-  .modal-content {
-    padding: 20px; /* Adjust padding for smaller screens */
-    width: 90%; /* Adjust width for smaller screens */
-  }
-
-  .modal h3 {
-    font-size: 20px; /* Adjust font size for smaller screens */
-  }
-
-  .modal p {
-    font-size: 14px; /* Adjust font size for smaller screens */
-  }
-
-  .modal button {
-    padding: 10px 20px; /* Adjust padding for smaller screens */
-    font-size: 16px; /* Adjust font size for smaller screens */
-  }
-
-  .btn-container button {
-    padding: 6px 10px; /* Adjust padding for smaller screens */
-    font-size: 8px; /* Adjust font size for smaller screens */
-    margin: 2px; /* Adjust margin for smaller screens */
-  }
-
-  .delete-selected-button {
-    left: 190px;
-    bottom: -355px;
-  }
-
-  .search-input {
-    margin-top: 300px;
-    margin-bottom: 10px;
-    padding: 8px 12px; /* Adjust padding for a more modern look */
-    border: none; /* Remove the border */
-    border-radius: 20px; /* Increase the border radius for rounded corners */
-    background-color: #f2f2f2; /* Add a background color */
-    color: #333; /* Set text color */
-    font-size: 16px; /* Increase the font size */
-    width: 50%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
-    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Add smooth transitions */
-  }
-
-  .search-input:focus {
-    outline: none; /* Remove the default focus outline */
-    background-color: #e6e6e6; /* Change background color on focus */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust box shadow on focus */
-  }
+  /* Container styles */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  justify-content: center; /* Center content vertically */
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
 }
