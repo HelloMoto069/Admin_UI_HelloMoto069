@@ -3,46 +3,46 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const App = () => {
-  const [users, setUsers] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+const MyApplication = () => {
+  const [userData, setUserData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedRows, setSelectedRows] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [editingUser, setEditingUser] = useState(null);
+  const [editingUserData, setEditingUserData] = useState(null);
   const itemsPerPage = 10;
 
-  // Calculate the current page's subset of users
+  // Calculate the current page's subset of data
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const currentUsers = filteredUsers.slice(startIndex, endIndex);
+  const currentData = filteredData.slice(startIndex, endIndex);
 
   useEffect(() => {
-    // Fetch users from API
+    // Fetch data from API
     fetch(
       "https://geektrust.s3-ap-southeast-1.amazonaws.com/adminui-problem/members.json"
     )
       .then((response) => response.json())
       .then((data) => {
-        setUsers(data);
-        setFilteredUsers(data);
+        setUserData(data);
+        setFilteredData(data);
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
   // Handle search/filter
   useEffect(() => {
-    const filtered = users.filter((user) =>
+    const filtered = userData.filter((user) =>
       Object.values(user).some((value) =>
-        String(value).toLowerCase().includes(searchTerm.toLowerCase())
+        String(value).toLowerCase().includes(searchQuery.toLowerCase())
       )
     );
-    setFilteredUsers(filtered);
+    setFilteredData(filtered);
     setCurrentPage(1); // Reset to first page after filtering
-  }, [searchTerm, users]);
+  }, [searchQuery, userData]);
 
   // Calculate total pages for pagination
-  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
   // Pagination logic
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -60,14 +60,14 @@ const App = () => {
 
   // Handle delete selected rows
   const handleDeleteSelected = () => {
-    const updatedUsers = users.filter(
+    const updatedData = userData.filter(
       (user) => !selectedRows.includes(user.id)
     );
-    setUsers(updatedUsers);
-    setFilteredUsers(updatedUsers);
+    setUserData(updatedData);
+    setFilteredData(updatedData);
     setSelectedRows([]);
-    setSearchTerm("");
-    toast.error("Delete Sucessfully !", {
+    setSearchQuery("");
+    toast.error("Deletion Successful!", {
       position: "top-right",
       autoClose: 1700,
       theme: "dark",
@@ -76,18 +76,17 @@ const App = () => {
 
   // Handle edit action
   const handleEdit = (user) => {
-    setEditingUser(user);
+    setEditingUserData(user);
   };
 
   // Handle save action
   const handleSave = () => {
-    // Implement your save logic here
-    const updatedUsers = users.map((user) =>
-      user.id === editingUser.id ? editingUser : user
+    const updatedData = userData.map((user) =>
+      user.id === editingUserData.id ? editingUserData : user
     );
-    setUsers(updatedUsers);
-    setFilteredUsers(updatedUsers);
-    setEditingUser(null);
+    setUserData(updatedData);
+    setFilteredData(updatedData);
+    setEditingUserData(null);
     toast.success("Saved Successfully!", {
       position: "top-right",
       autoClose: 1700,
@@ -97,8 +96,8 @@ const App = () => {
 
   // Handle cancel action
   const handleCancel = () => {
-    setEditingUser(null);
-    toast.error("Not Saved !", {
+    setEditingUserData(null);
+    toast.error("Changes Not Saved!", {
       position: "top-right",
       autoClose: 1700,
       theme: "dark",
@@ -112,11 +111,11 @@ const App = () => {
     );
 
     if (confirmDelete) {
-      const updatedUsers = users.filter((user) => user.id !== userId);
-      setUsers(updatedUsers);
-      setFilteredUsers(updatedUsers);
+      const updatedData = userData.filter((user) => user.id !== userId);
+      setUserData(updatedData);
+      setFilteredData(updatedData);
       setSelectedRows(selectedRows.filter((id) => id !== userId));
-      toast.error("Delete Sucessfully !", {
+      toast.error("Deletion Successful!", {
         position: "top-right",
         autoClose: 1700,
         theme: "dark",
@@ -126,11 +125,11 @@ const App = () => {
 
   const handleSelectAllRows = (event) => {
     const { checked } = event.target;
-    const allRowIds = currentUsers.map((user) => user.id);
+    const allRowIds = currentData.map((user) => user.id);
 
     if (checked && selectedRows.length !== allRowIds.length) {
       setSelectedRows(allRowIds);
-      toast.warn("Hey You Selected All !", {
+      toast.warn("All Rows Selected!", {
         position: "top-right",
         autoClose: 1700,
         theme: "dark",
@@ -146,10 +145,13 @@ const App = () => {
         className="search-input"
         type="text"
         placeholder="Search..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
       />
-      <button className="clear-search-button" onClick={() => setSearchTerm("")}>
+      <button
+        className="clear-search-button"
+        onClick={() => setSearchQuery("")}
+      >
         Clear Search
       </button>
 
@@ -160,7 +162,7 @@ const App = () => {
             <th>
               <input
                 type="checkbox"
-                checked={selectedRows.length === currentUsers.length}
+                checked={selectedRows.length === currentData.length}
                 onChange={handleSelectAllRows}
                 className="checkbox-input"
               />
@@ -177,7 +179,7 @@ const App = () => {
 
         {/* Table body */}
         <tbody>
-          {filteredUsers
+          {filteredData
             .slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage)
             .map((user) => (
               <tr
@@ -212,44 +214,21 @@ const App = () => {
       </table>
 
       {/* Edit Modal */}
-      {editingUser && (
+      {editingUserData && (
         <div className="modal">
           <div className="modal-content">
-            {/* <label>Name: </label>
-            <input
-              type="text"
-              value={editingUser.name}
-              onChange={(e) =>
-                setEditingUser({ ...editingUser, name: e.target.value })
-              }
-            /> */}
-            {/* <label>Email: </label>
-            <input
-              type="text"
-              value={editingUser.email}
-              onChange={(e) =>
-                setEditingUser({ ...editingUser, email: e.target.value })
-              }
-            /> */}
-            {/* <label>Role: </label>
-            <input
-              type="text"
-              value={editingUser.role}
-              onChange={(e) =>
-                setEditingUser({ ...editingUser, role: e.target.value })
-              }
-            /> */}
-            {/* <button onClick={handleSave}>Save</button>
-            <button onClick={handleCancel}>Cancel</button> */}
             <h3>Edit Details</h3>
-            <p>ID: {editingUser.id}</p>
+            <p>ID: {editingUserData.id}</p>
             <p>
               Name:{" "}
               <input
                 type="text"
-                value={editingUser.name}
+                value={editingUserData.name}
                 onChange={(e) =>
-                  setEditingUser({ ...editingUser, name: e.target.value })
+                  setEditingUserData({
+                    ...editingUserData,
+                    name: e.target.value,
+                  })
                 }
               />
             </p>
@@ -257,9 +236,12 @@ const App = () => {
               Email:{" "}
               <input
                 type="text"
-                value={editingUser.email}
+                value={editingUserData.email}
                 onChange={(e) =>
-                  setEditingUser({ ...editingUser, email: e.target.value })
+                  setEditingUserData({
+                    ...editingUserData,
+                    email: e.target.value,
+                  })
                 }
               />
             </p>
@@ -267,9 +249,12 @@ const App = () => {
               Role:{" "}
               <input
                 type="text"
-                value={editingUser.role}
+                value={editingUserData.role}
                 onChange={(e) =>
-                  setEditingUser({ ...editingUser, role: e.target.value })
+                  setEditingUserData({
+                    ...editingUserData,
+                    role: e.target.value,
+                  })
                 }
               />
             </p>
@@ -281,7 +266,6 @@ const App = () => {
 
       {/* Pagination */}
       <div className="pagination">
-        {/* Delete selected button */}
         <button
           className="delete-selected-button"
           onClick={() => handleDeleteSelected()}
@@ -332,4 +316,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default MyApplication;
