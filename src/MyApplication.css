@@ -20,7 +20,7 @@
   background-color: #f2f2f2;
   color: #333;
   font-size: 16px;
-  width: 70%;
+  width: 90%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
