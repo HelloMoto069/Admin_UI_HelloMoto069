@@ -36,9 +36,9 @@ const Modal = ({ editingUser, setEditingUser, handleSave, handleCancel }) => {
             }
           />
         </p>
+        <button onClick={handleSave}>Save</button>
+        <button onClick={handleCancel}>Cancel</button>
       </div>
-      <button onClick={handleSave}>Save</button>
-      <button onClick={handleCancel}>Cancel</button>
     </div>
   );
 };
